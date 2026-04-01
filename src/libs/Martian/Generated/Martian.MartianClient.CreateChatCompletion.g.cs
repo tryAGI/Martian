@@ -402,6 +402,7 @@ namespace Martian
             object? extra = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+
             var __request = new global::Martian.ChatCompletionRequest
             {
                 Model = model,
