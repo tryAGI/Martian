@@ -353,7 +353,6 @@ namespace Martian
             global::System.Collections.Generic.IList<string>? stopSequences = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::Martian.MessagesRequest
             {
                 Model = model,
