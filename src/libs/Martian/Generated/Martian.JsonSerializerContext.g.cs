@@ -151,7 +151,7 @@ namespace Martian
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Martian.Tool>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.OneOf<global::Martian.ChatCompletionRequestToolChoiceEnum?, global::Martian.ChatCompletionRequestToolChoiceEnum2>), TypeInfoPropertyName = "OneOfChatCompletionRequestToolChoiceEnumChatCompletionRequestToolChoiceEnum22")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionRequestToolChoiceEnum), TypeInfoPropertyName = "ChatCompletionRequestToolChoiceEnum3")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionRequestToolChoiceEnum), TypeInfoPropertyName = "ChatCompletionRequestToolChoiceEnum2_3")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionRequestToolChoiceEnum2))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionRequestToolChoiceEnumType), TypeInfoPropertyName = "ChatCompletionRequestToolChoiceEnumType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionRequestToolChoiceEnumFunction))]
