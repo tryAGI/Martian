@@ -6,6 +6,7 @@ namespace Martian
     public sealed partial class MartianClient
     {
         /// <inheritdoc cref="MartianClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::Martian.EndPointAuthorization}?, bool)"/>
+
         public MartianClient(
             string apiKey,
             global::System.Net.Http.HttpClient? httpClient = null,
