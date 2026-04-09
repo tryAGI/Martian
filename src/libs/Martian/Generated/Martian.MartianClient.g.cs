@@ -17,7 +17,7 @@ namespace Martian
         /// <summary>
         /// Production server
         /// </summary>
-        public const string DefaultBaseUrl = "https://api.withmartian.com";
+        public const string DefaultBaseUrl = "https://api.withmartian.com/";
 
         private bool _disposeHttpClient = true;
 

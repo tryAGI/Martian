@@ -5,6 +5,25 @@ namespace Martian
 {
     public partial class MartianClient
     {
+
+
+        private static readonly global::Martian.EndPointSecurityRequirement s_CreateChatCompletionSecurityRequirement0 =
+            new global::Martian.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Martian.EndPointAuthorizationRequirement[]
+                {                    new global::Martian.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Martian.EndPointSecurityRequirement[] s_CreateChatCompletionSecurityRequirements =
+            new global::Martian.EndPointSecurityRequirement[]
+            {                s_CreateChatCompletionSecurityRequirement0,
+            };
         partial void PrepareCreateChatCompletionArguments(
             global::System.Net.Http.HttpClient httpClient,
             global::Martian.ChatCompletionRequest request);
@@ -44,9 +63,15 @@ namespace Martian
                 httpClient: HttpClient,
                 request: request);
 
+
+            var __authorizations = global::Martian.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_CreateChatCompletionSecurityRequirements,
+                operationName: "CreateChatCompletionAsync");
+
             var __pathBuilder = new global::Martian.PathBuilder(
                 path: "/v1/chat/completions",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -56,7 +81,7 @@ namespace Martian
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
