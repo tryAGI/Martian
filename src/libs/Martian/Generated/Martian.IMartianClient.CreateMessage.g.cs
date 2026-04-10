@@ -11,11 +11,13 @@ namespace Martian
         /// for the model field (e.g., anthropic/claude-sonnet-4-20250514).
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Martian.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Martian.MessagesResponse> CreateMessageAsync(
 
             global::Martian.MessagesRequest request,
+            global::Martian.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a message (Anthropic-compatible)<br/>
@@ -58,6 +60,7 @@ namespace Martian
         /// <param name="stopSequences">
         /// Custom text sequences that will cause the model to stop generating.
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Martian.MessagesResponse> CreateMessageAsync(
@@ -72,6 +75,7 @@ namespace Martian
             global::System.Collections.Generic.IList<global::Martian.AnthropicTool>? tools = default,
             global::Martian.MessagesRequestToolChoice? toolChoice = default,
             global::System.Collections.Generic.IList<string>? stopSequences = default,
+            global::Martian.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
