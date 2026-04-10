@@ -12,11 +12,13 @@ namespace Martian
         /// The gateway intelligently routes to the best model based on cost, quality, and latency.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Martian.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Martian.ChatCompletionResponse> CreateChatCompletionAsync(
 
             global::Martian.ChatCompletionRequest request,
+            global::Martian.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a chat completion<br/>
@@ -96,6 +98,7 @@ namespace Martian
         /// <param name="extra">
         /// Arbitrary metadata to attach to the request for tracking.
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Martian.ChatCompletionResponse> CreateChatCompletionAsync(
@@ -121,6 +124,7 @@ namespace Martian
             float? maxCostPerMillionTokens = default,
             float? willingnessToPay = default,
             object? extra = default,
+            global::Martian.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

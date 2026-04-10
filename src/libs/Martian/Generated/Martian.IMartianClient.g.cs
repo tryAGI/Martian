@@ -39,6 +39,11 @@ namespace Martian
         public bool ReadResponseAsString { get; set; }
 
         /// <summary>
+        /// Client-wide request defaults such as headers, query parameters, retries, and timeout.
+        /// </summary>
+        public global::Martian.AutoSDKClientOptions Options { get; }
+
+        /// <summary>
         /// 
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }

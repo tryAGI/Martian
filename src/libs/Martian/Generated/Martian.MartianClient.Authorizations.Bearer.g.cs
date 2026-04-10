@@ -25,6 +25,7 @@ namespace Martian
             Authorizations.Add(new global::Martian.EndPointAuthorization
             {
                 Type = "Http",
+                SchemeId = "HttpBearer",
                 Location = "Header",
                 Name = "Bearer",
                 Value = apiKey,
