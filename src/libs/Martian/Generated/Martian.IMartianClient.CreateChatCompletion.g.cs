@@ -27,6 +27,22 @@ namespace Martian
         /// such as models, max_cost, max_cost_per_million_tokens, and willingness_to_pay.<br/>
         /// The gateway intelligently routes to the best model based on cost, quality, and latency.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Martian.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Martian.AutoSDKHttpResponse<global::Martian.ChatCompletionResponse>> CreateChatCompletionAsResponseAsync(
+
+            global::Martian.ChatCompletionRequest request,
+            global::Martian.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Create a chat completion<br/>
+        /// Creates a chat completion using the specified model via the Martian Gateway.<br/>
+        /// Supports OpenAI-compatible parameters plus Martian-specific routing parameters<br/>
+        /// such as models, max_cost, max_cost_per_million_tokens, and willingness_to_pay.<br/>
+        /// The gateway intelligently routes to the best model based on cost, quality, and latency.
+        /// </summary>
         /// <param name="model">
         /// The model to use, in provider/model-name format.<br/>
         /// Example: openai/gpt-4.1-nano, anthropic/claude-sonnet-4-20250514
