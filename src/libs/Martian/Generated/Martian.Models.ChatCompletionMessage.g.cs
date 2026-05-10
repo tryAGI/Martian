@@ -89,5 +89,6 @@ namespace Martian
         public ChatCompletionMessage()
         {
         }
+
     }
 }

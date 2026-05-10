@@ -51,5 +51,6 @@ namespace Martian
         public MessagesRequestToolChoice()
         {
         }
+
     }
 }
