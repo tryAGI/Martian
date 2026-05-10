@@ -86,5 +86,6 @@ namespace Martian
         public AnthropicResponseContentBlock()
         {
         }
+
     }
 }

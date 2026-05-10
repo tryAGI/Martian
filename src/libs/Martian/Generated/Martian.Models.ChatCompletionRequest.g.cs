@@ -288,5 +288,6 @@ namespace Martian
         public ChatCompletionRequest()
         {
         }
+
     }
 }
