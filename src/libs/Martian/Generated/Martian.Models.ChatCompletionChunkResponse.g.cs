@@ -96,5 +96,6 @@ namespace Martian
         public ChatCompletionChunkResponse()
         {
         }
+
     }
 }

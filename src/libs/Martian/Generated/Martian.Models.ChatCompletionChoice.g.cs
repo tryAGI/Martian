@@ -62,5 +62,6 @@ namespace Martian
         public ChatCompletionChoice()
         {
         }
+
     }
 }

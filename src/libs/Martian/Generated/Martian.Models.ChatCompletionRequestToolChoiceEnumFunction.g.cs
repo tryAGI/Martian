@@ -39,5 +39,6 @@ namespace Martian
         public ChatCompletionRequestToolChoiceEnumFunction()
         {
         }
+
     }
 }

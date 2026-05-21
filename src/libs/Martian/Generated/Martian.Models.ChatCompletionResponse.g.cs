@@ -107,5 +107,6 @@ namespace Martian
         public ChatCompletionResponse()
         {
         }
+
     }
 }
