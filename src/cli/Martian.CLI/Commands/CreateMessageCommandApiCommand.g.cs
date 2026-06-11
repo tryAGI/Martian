@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -74,18 +75,18 @@ Example: anthropic/claude-sonnet-4-20250514
     {
         Description = @"Custom text sequences that will cause the model to stop generating.",
     };
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -140,7 +141,7 @@ for the model field (e.g., anthropic/claude-sonnet-4-20250514).
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -157,14 +158,14 @@ for the model field (e.g., anthropic/claude-sonnet-4-20250514).
                         var model = parseResult.GetRequiredValue(Model);
                         var messages = parseResult.GetRequiredValue(Messages);
                         var maxTokens = parseResult.GetRequiredValue(MaxTokens);
-                        var system = parseResult.GetValue(System) ?? __requestBase?.System;
-                        var temperature = parseResult.GetValue(Temperature) ?? __requestBase?.Temperature;
-                        var topP = parseResult.GetValue(TopP) ?? __requestBase?.TopP;
-                        var topK = parseResult.GetValue(TopK) ?? __requestBase?.TopK;
-                        var stream = parseResult.GetValue(Stream) ?? __requestBase?.Stream;
-                        var tools = parseResult.GetValue(Tools) ?? __requestBase?.Tools;
-                        var toolChoice = parseResult.GetValue(ToolChoice) ?? __requestBase?.ToolChoice;
-                        var stopSequences = parseResult.GetValue(StopSequences) ?? __requestBase?.StopSequences;
+                        var system = CliRuntime.WasSpecified(parseResult, System) ? parseResult.GetValue(System) : __requestBase is not null ? __requestBase.System : default;
+                        var temperature = CliRuntime.WasSpecified(parseResult, Temperature) ? parseResult.GetValue(Temperature) : __requestBase is not null ? __requestBase.Temperature : default;
+                        var topP = CliRuntime.WasSpecified(parseResult, TopP) ? parseResult.GetValue(TopP) : __requestBase is not null ? __requestBase.TopP : default;
+                        var topK = CliRuntime.WasSpecified(parseResult, TopK) ? parseResult.GetValue(TopK) : __requestBase is not null ? __requestBase.TopK : default;
+                        var stream = CliRuntime.WasSpecified(parseResult, Stream) ? parseResult.GetValue(Stream) : __requestBase is not null ? __requestBase.Stream : default;
+                        var tools = CliRuntime.WasSpecified(parseResult, Tools) ? parseResult.GetValue(Tools) : __requestBase is not null ? __requestBase.Tools : default;
+                        var toolChoice = CliRuntime.WasSpecified(parseResult, ToolChoice) ? parseResult.GetValue(ToolChoice) : __requestBase is not null ? __requestBase.ToolChoice : default;
+                        var stopSequences = CliRuntime.WasSpecified(parseResult, StopSequences) ? parseResult.GetValue(StopSequences) : __requestBase is not null ? __requestBase.StopSequences : default;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
