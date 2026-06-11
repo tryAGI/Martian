@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -146,18 +147,18 @@ If not set, defaults to infinity (optimize only for performance).
     {
         Description = @"Arbitrary metadata to attach to the request for tracking.",
     };
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -224,7 +225,7 @@ The gateway intelligently routes to the best model based on cost, quality, and l
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -240,26 +241,26 @@ The gateway intelligently routes to the best model based on cost, quality, and l
                             cancellationToken).ConfigureAwait(false);
                         var model = parseResult.GetRequiredValue(Model);
                         var messages = parseResult.GetRequiredValue(Messages);
-                        var temperature = parseResult.GetValue(Temperature) ?? __requestBase?.Temperature;
-                        var maxCompletionTokens = parseResult.GetValue(MaxCompletionTokens) ?? __requestBase?.MaxCompletionTokens;
-                        var maxTokens = parseResult.GetValue(MaxTokens) ?? __requestBase?.MaxTokens;
-                        var stream = parseResult.GetValue(Stream) ?? __requestBase?.Stream;
-                        var tools = parseResult.GetValue(Tools) ?? __requestBase?.Tools;
-                        var toolChoice = parseResult.GetValue(ToolChoice) ?? __requestBase?.ToolChoice;
-                        var responseFormat = parseResult.GetValue(ResponseFormat) ?? __requestBase?.ResponseFormat;
-                        var frequencyPenalty = parseResult.GetValue(FrequencyPenalty) ?? __requestBase?.FrequencyPenalty;
-                        var presencePenalty = parseResult.GetValue(PresencePenalty) ?? __requestBase?.PresencePenalty;
-                        var topP = parseResult.GetValue(TopP) ?? __requestBase?.TopP;
-                        var seed = parseResult.GetValue(Seed) ?? __requestBase?.Seed;
-                        var stop = parseResult.GetValue(Stop) ?? __requestBase?.Stop;
-                        var logprobs = parseResult.GetValue(Logprobs) ?? __requestBase?.Logprobs;
-                        var topLogprobs = parseResult.GetValue(TopLogprobs) ?? __requestBase?.TopLogprobs;
-                        var user = parseResult.GetValue(User) ?? __requestBase?.User;
-                        var models = parseResult.GetValue(Models) ?? __requestBase?.Models;
-                        var maxCost = parseResult.GetValue(MaxCost) ?? __requestBase?.MaxCost;
-                        var maxCostPerMillionTokens = parseResult.GetValue(MaxCostPerMillionTokens) ?? __requestBase?.MaxCostPerMillionTokens;
-                        var willingnessToPay = parseResult.GetValue(WillingnessToPay) ?? __requestBase?.WillingnessToPay;
-                        var extra = parseResult.GetValue(Extra) ?? __requestBase?.Extra;
+                        var temperature = CliRuntime.WasSpecified(parseResult, Temperature) ? parseResult.GetValue(Temperature) : __requestBase is not null ? __requestBase.Temperature : default;
+                        var maxCompletionTokens = CliRuntime.WasSpecified(parseResult, MaxCompletionTokens) ? parseResult.GetValue(MaxCompletionTokens) : __requestBase is not null ? __requestBase.MaxCompletionTokens : default;
+                        var maxTokens = CliRuntime.WasSpecified(parseResult, MaxTokens) ? parseResult.GetValue(MaxTokens) : __requestBase is not null ? __requestBase.MaxTokens : default;
+                        var stream = CliRuntime.WasSpecified(parseResult, Stream) ? parseResult.GetValue(Stream) : __requestBase is not null ? __requestBase.Stream : default;
+                        var tools = CliRuntime.WasSpecified(parseResult, Tools) ? parseResult.GetValue(Tools) : __requestBase is not null ? __requestBase.Tools : default;
+                        var toolChoice = CliRuntime.WasSpecified(parseResult, ToolChoice) ? parseResult.GetValue(ToolChoice) : __requestBase is not null ? __requestBase.ToolChoice : default;
+                        var responseFormat = CliRuntime.WasSpecified(parseResult, ResponseFormat) ? parseResult.GetValue(ResponseFormat) : __requestBase is not null ? __requestBase.ResponseFormat : default;
+                        var frequencyPenalty = CliRuntime.WasSpecified(parseResult, FrequencyPenalty) ? parseResult.GetValue(FrequencyPenalty) : __requestBase is not null ? __requestBase.FrequencyPenalty : default;
+                        var presencePenalty = CliRuntime.WasSpecified(parseResult, PresencePenalty) ? parseResult.GetValue(PresencePenalty) : __requestBase is not null ? __requestBase.PresencePenalty : default;
+                        var topP = CliRuntime.WasSpecified(parseResult, TopP) ? parseResult.GetValue(TopP) : __requestBase is not null ? __requestBase.TopP : default;
+                        var seed = CliRuntime.WasSpecified(parseResult, Seed) ? parseResult.GetValue(Seed) : __requestBase is not null ? __requestBase.Seed : default;
+                        var stop = CliRuntime.WasSpecified(parseResult, Stop) ? parseResult.GetValue(Stop) : __requestBase is not null ? __requestBase.Stop : default;
+                        var logprobs = CliRuntime.WasSpecified(parseResult, Logprobs) ? parseResult.GetValue(Logprobs) : __requestBase is not null ? __requestBase.Logprobs : default;
+                        var topLogprobs = CliRuntime.WasSpecified(parseResult, TopLogprobs) ? parseResult.GetValue(TopLogprobs) : __requestBase is not null ? __requestBase.TopLogprobs : default;
+                        var user = CliRuntime.WasSpecified(parseResult, User) ? parseResult.GetValue(User) : __requestBase is not null ? __requestBase.User : default;
+                        var models = CliRuntime.WasSpecified(parseResult, Models) ? parseResult.GetValue(Models) : __requestBase is not null ? __requestBase.Models : default;
+                        var maxCost = CliRuntime.WasSpecified(parseResult, MaxCost) ? parseResult.GetValue(MaxCost) : __requestBase is not null ? __requestBase.MaxCost : default;
+                        var maxCostPerMillionTokens = CliRuntime.WasSpecified(parseResult, MaxCostPerMillionTokens) ? parseResult.GetValue(MaxCostPerMillionTokens) : __requestBase is not null ? __requestBase.MaxCostPerMillionTokens : default;
+                        var willingnessToPay = CliRuntime.WasSpecified(parseResult, WillingnessToPay) ? parseResult.GetValue(WillingnessToPay) : __requestBase is not null ? __requestBase.WillingnessToPay : default;
+                        var extra = CliRuntime.WasSpecified(parseResult, Extra) ? parseResult.GetValue(Extra) : __requestBase is not null ? __requestBase.Extra : default;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
