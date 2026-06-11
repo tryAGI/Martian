@@ -32,6 +32,13 @@ var response = await client.CreateChatCompletionAsync(
     willingnessToPay: 0.1f);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global Martian.CLI --prerelease
+martian api --help
+```
+
 <!-- EXAMPLES:START -->
 <!-- EXAMPLES:END -->
 
