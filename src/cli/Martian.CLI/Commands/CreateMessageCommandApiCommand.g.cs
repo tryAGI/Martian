@@ -158,14 +158,14 @@ for the model field (e.g., anthropic/claude-sonnet-4-20250514).
                         var model = parseResult.GetRequiredValue(Model);
                         var messages = parseResult.GetRequiredValue(Messages);
                         var maxTokens = parseResult.GetRequiredValue(MaxTokens);
-                        var system = CliRuntime.WasSpecified(parseResult, System) ? parseResult.GetValue(System) : __requestBase is not null ? __requestBase.System : default;
-                        var temperature = CliRuntime.WasSpecified(parseResult, Temperature) ? parseResult.GetValue(Temperature) : __requestBase is not null ? __requestBase.Temperature : default;
-                        var topP = CliRuntime.WasSpecified(parseResult, TopP) ? parseResult.GetValue(TopP) : __requestBase is not null ? __requestBase.TopP : default;
-                        var topK = CliRuntime.WasSpecified(parseResult, TopK) ? parseResult.GetValue(TopK) : __requestBase is not null ? __requestBase.TopK : default;
-                        var stream = CliRuntime.WasSpecified(parseResult, Stream) ? parseResult.GetValue(Stream) : __requestBase is not null ? __requestBase.Stream : default;
-                        var tools = CliRuntime.WasSpecified(parseResult, Tools) ? parseResult.GetValue(Tools) : __requestBase is not null ? __requestBase.Tools : default;
-                        var toolChoice = CliRuntime.WasSpecified(parseResult, ToolChoice) ? parseResult.GetValue(ToolChoice) : __requestBase is not null ? __requestBase.ToolChoice : default;
-                        var stopSequences = CliRuntime.WasSpecified(parseResult, StopSequences) ? parseResult.GetValue(StopSequences) : __requestBase is not null ? __requestBase.StopSequences : default;
+                        var system = CliRuntime.WasSpecified(parseResult, System) ? parseResult.GetValue(System) : (__requestBase is { } __SystemBaseValue ? __SystemBaseValue.System : default);
+                        var temperature = CliRuntime.WasSpecified(parseResult, Temperature) ? parseResult.GetValue(Temperature) : (__requestBase is { } __TemperatureBaseValue ? __TemperatureBaseValue.Temperature : default);
+                        var topP = CliRuntime.WasSpecified(parseResult, TopP) ? parseResult.GetValue(TopP) : (__requestBase is { } __TopPBaseValue ? __TopPBaseValue.TopP : default);
+                        var topK = CliRuntime.WasSpecified(parseResult, TopK) ? parseResult.GetValue(TopK) : (__requestBase is { } __TopKBaseValue ? __TopKBaseValue.TopK : default);
+                        var stream = CliRuntime.WasSpecified(parseResult, Stream) ? parseResult.GetValue(Stream) : (__requestBase is { } __StreamBaseValue ? __StreamBaseValue.Stream : default);
+                        var tools = CliRuntime.WasSpecified(parseResult, Tools) ? parseResult.GetValue(Tools) : (__requestBase is { } __ToolsBaseValue ? __ToolsBaseValue.Tools : default);
+                        var toolChoice = CliRuntime.WasSpecified(parseResult, ToolChoice) ? parseResult.GetValue(ToolChoice) : (__requestBase is { } __ToolChoiceBaseValue ? __ToolChoiceBaseValue.ToolChoice : default);
+                        var stopSequences = CliRuntime.WasSpecified(parseResult, StopSequences) ? parseResult.GetValue(StopSequences) : (__requestBase is { } __StopSequencesBaseValue ? __StopSequencesBaseValue.StopSequences : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
