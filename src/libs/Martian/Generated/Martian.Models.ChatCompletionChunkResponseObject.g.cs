@@ -9,7 +9,7 @@ namespace Martian
     public enum ChatCompletionChunkResponseObject
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ChatCompletionChunk,
     }

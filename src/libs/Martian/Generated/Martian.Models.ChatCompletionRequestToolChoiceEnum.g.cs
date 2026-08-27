@@ -4,20 +4,20 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ChatCompletionRequestToolChoiceEnum
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         None,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Required,
     }

@@ -9,11 +9,11 @@ namespace Martian
     public enum ContentPartType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ImageUrl,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Text,
     }

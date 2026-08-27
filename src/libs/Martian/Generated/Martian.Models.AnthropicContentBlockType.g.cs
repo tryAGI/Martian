@@ -9,19 +9,19 @@ namespace Martian
     public enum AnthropicContentBlockType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Image,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Text,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ToolResult,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ToolUse,
     }

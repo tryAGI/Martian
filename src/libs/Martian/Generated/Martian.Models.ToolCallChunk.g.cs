@@ -4,7 +4,7 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ToolCallChunk
     {
@@ -21,14 +21,14 @@ namespace Martian
         public string? Id { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("type")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Martian.JsonConverters.ToolCallChunkTypeJsonConverter))]
         public global::Martian.ToolCallChunkType? Type { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("function")]
         public global::Martian.ToolCallChunkFunction? Function { get; set; }

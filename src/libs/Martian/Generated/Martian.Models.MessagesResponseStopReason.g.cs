@@ -9,19 +9,19 @@ namespace Martian
     public enum MessagesResponseStopReason
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EndTurn,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         MaxTokens,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         StopSequence,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ToolUse,
     }

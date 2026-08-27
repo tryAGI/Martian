@@ -9,11 +9,11 @@ namespace Martian
     public enum AnthropicMessageRole
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Assistant,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         User,
     }

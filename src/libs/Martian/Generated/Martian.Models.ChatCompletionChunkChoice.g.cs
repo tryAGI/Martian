@@ -4,7 +4,7 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ChatCompletionChunkChoice
     {
@@ -15,7 +15,7 @@ namespace Martian
         public int? Index { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("delta")]
         public global::Martian.ChatCompletionChunkDelta? Delta { get; set; }

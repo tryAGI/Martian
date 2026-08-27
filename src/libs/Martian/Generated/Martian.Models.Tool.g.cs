@@ -4,7 +4,7 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class Tool
     {
@@ -16,7 +16,7 @@ namespace Martian
         public global::Martian.ToolType Type { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("function")]
         [global::System.Text.Json.Serialization.JsonRequired]

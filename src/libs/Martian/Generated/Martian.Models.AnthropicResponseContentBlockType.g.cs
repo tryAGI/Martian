@@ -9,11 +9,11 @@ namespace Martian
     public enum AnthropicResponseContentBlockType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Text,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ToolUse,
     }

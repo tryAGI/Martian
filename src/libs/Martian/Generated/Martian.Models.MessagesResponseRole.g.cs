@@ -9,7 +9,7 @@ namespace Martian
     public enum MessagesResponseRole
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Assistant,
     }
