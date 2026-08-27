@@ -9,7 +9,7 @@ namespace Martian
     public enum ToolCallType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Function,
     }

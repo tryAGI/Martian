@@ -4,20 +4,20 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum MessagesRequestToolChoiceType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Any,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Tool,
     }

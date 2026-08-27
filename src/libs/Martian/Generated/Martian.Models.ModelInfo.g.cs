@@ -4,7 +4,7 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ModelInfo
     {

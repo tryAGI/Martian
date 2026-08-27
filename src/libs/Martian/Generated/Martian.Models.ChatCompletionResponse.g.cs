@@ -4,7 +4,7 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ChatCompletionResponse
     {
@@ -41,7 +41,7 @@ namespace Martian
         public global::System.Collections.Generic.IList<global::Martian.ChatCompletionChoice>? Choices { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("usage")]
         public global::Martian.CompletionUsage? Usage { get; set; }

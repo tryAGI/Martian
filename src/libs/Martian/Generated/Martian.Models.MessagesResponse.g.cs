@@ -4,7 +4,7 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class MessagesResponse
     {
@@ -54,7 +54,7 @@ namespace Martian
         public string? StopSequence { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("usage")]
         public global::Martian.AnthropicUsage? Usage { get; set; }

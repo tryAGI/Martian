@@ -9,7 +9,7 @@ namespace Martian
     public enum ModelInfoObject
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Model,
     }

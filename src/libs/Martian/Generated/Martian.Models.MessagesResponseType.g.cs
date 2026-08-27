@@ -9,7 +9,7 @@ namespace Martian
     public enum MessagesResponseType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Message,
     }

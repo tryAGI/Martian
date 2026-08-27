@@ -4,19 +4,19 @@
 namespace Martian
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ChatCompletionRequestToolChoiceEnum2
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("type")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Martian.JsonConverters.ChatCompletionRequestToolChoiceEnumTypeJsonConverter))]
         public global::Martian.ChatCompletionRequestToolChoiceEnumType? Type { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("function")]
         public global::Martian.ChatCompletionRequestToolChoiceEnumFunction? Function { get; set; }

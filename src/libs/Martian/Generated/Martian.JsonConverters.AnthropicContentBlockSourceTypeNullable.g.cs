@@ -20,7 +20,7 @@ namespace Martian.JsonConverters
                     {
                         return global::Martian.AnthropicContentBlockSourceTypeExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:
