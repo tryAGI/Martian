@@ -112,6 +112,8 @@ Example: anthropic/claude-sonnet-4-20250514
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-message", @"Create a message (Anthropic-compatible)
@@ -199,6 +201,7 @@ for the model field (e.g., anthropic/claude-sonnet-4-20250514).
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

@@ -184,6 +184,8 @@ If not set, defaults to infinity (optimize only for performance).
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-chat-completion", @"Create a chat completion
@@ -305,6 +307,7 @@ The gateway intelligently routes to the best model based on cost, quality, and l
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
