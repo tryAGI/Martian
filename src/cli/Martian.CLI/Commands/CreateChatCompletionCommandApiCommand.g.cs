@@ -186,9 +186,9 @@ If not set, defaults to infinity (optimize only for performance).
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-chat-completion", @"Create a chat completion
+        var command = new Command(commandName ?? @"create-chat-completion", @"Create a chat completion
 Creates a chat completion using the specified model via the Martian Gateway.
 Supports OpenAI-compatible parameters plus Martian-specific routing parameters
 such as models, max_cost, max_cost_per_million_tokens, and willingness_to_pay.

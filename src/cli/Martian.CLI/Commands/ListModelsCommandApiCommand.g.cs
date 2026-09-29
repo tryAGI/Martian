@@ -31,9 +31,9 @@ internal static partial class ListModelsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-models", @"List available models
+        var command = new Command(commandName ?? @"list-models", @"List available models
 Returns a list of all models currently supported by the Martian Gateway,
 including pricing information (cost per token in USD), reliability tiers,
 maximum completion tokens, and provider details.
