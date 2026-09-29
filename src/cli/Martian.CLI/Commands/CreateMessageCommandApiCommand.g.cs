@@ -114,9 +114,9 @@ Example: anthropic/claude-sonnet-4-20250514
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-message", @"Create a message (Anthropic-compatible)
+        var command = new Command(commandName ?? @"create-message", @"Create a message (Anthropic-compatible)
 Creates a message using the Anthropic Messages API format via the Martian Gateway.
 Supports most Anthropic Messages API parameters. Use provider/model-name format
 for the model field (e.g., anthropic/claude-sonnet-4-20250514).
