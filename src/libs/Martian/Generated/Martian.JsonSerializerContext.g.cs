@@ -124,6 +124,7 @@ namespace Martian
     #pragma warning restore CS3016
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.JsonSerializerContextTypes))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<object>), TypeInfoPropertyName = "SystemCollectionsGeneric_ObjectList")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionMessage))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.ChatCompletionMessageRole), TypeInfoPropertyName = "ChatCompletionMessageRole2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Martian.OneOf<string, global::System.Collections.Generic.IList<global::Martian.ContentPart>>), TypeInfoPropertyName = "OneOfStringIListContentPart2")]
