@@ -15,6 +15,18 @@ martian --help
 martian default --help
 ```
 
+## Shell completion
+
+The `completion` command prints a script built from the live command tree, so
+subcommands, option names and the values of enum-typed options stay correct after the
+spec is refreshed and the CLI regenerated — there is no word list to maintain.
+
+```bash
+martian completion bash > /usr/local/etc/bash_completion.d/martian
+martian completion zsh  > _martian   # then put it on your zsh fpath
+martian completion fish > ~/.config/fish/completions/martian.fish
+```
+
 ## Customization
 
 Generated operation, tag, and API group command classes are partial. Implement
