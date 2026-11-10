@@ -12,6 +12,7 @@ internal static partial class DefaultApiGroupCommand
     {
         var command = new Command(@"default", @"default endpoint commands.");
                          command.Subcommands.Add(CreateChatCompletionCommandApiCommand.Create());
+                         command.Subcommands.Add(CreateChatCompletionAsStreamCommandApiCommand.Create());
                          command.Subcommands.Add(CreateMessageCommandApiCommand.Create());
                          command.Subcommands.Add(ListModelsCommandApiCommand.Create());
         CustomizeCommand(ref command);

@@ -7,43 +7,12 @@ namespace Martian.CLI.Commands;
 
 internal static partial class CreateChatCompletionCommandApiCommand
 {
-    private static Option<string> Model { get; } = new(
-        name: @"--model")
-    {
-        Description = @"The model to use, in provider/model-name format.
-Example: openai/gpt-4.1-nano, anthropic/claude-sonnet-4-20250514
-",
-        Required = true,
-    };
-
     private static Option<global::System.Collections.Generic.IList<global::Martian.ChatCompletionMessage>> Messages { get; } = new(
         name: @"--messages")
     {
         Description = @"A list of messages comprising the conversation so far.",
         Required = true,
     };
-
-    private static Option<float?> Temperature { get; } = new(
-        name: @"--temperature")
-    {
-        Description = @"Sampling temperature between 0 and 2.",
-    };
-
-    private static Option<int?> MaxCompletionTokens { get; } = new(
-        name: @"--max-completion-tokens")
-    {
-        Description = @"Maximum number of tokens to generate in the chat completion.",
-    };
-
-    private static Option<int?> MaxTokens { get; } = new(
-        name: @"--max-tokens")
-    {
-        Description = @"Maximum number of tokens to generate (deprecated, use max_completion_tokens).",
-    };
-
-    private static Option<bool?> Stream { get; } = CliRuntime.CreateNullableBoolOption(
-        name: @"--stream",
-        description: @"If true, partial message deltas will be sent as SSE events.");
 
     private static Option<global::System.Collections.Generic.IList<global::Martian.Tool>?> Tools { get; } = new(
         name: @"--tools")
@@ -57,89 +26,10 @@ Example: openai/gpt-4.1-nano, anthropic/claude-sonnet-4-20250514
         Description = @"Controls which (if any) tool is called by the model.",
     };
 
-    private static Option<global::Martian.ResponseFormat?> ResponseFormat { get; } = new(
-        name: @"--response-format")
-    {
-        Description = @"",
-    };
-
-    private static Option<float?> FrequencyPenalty { get; } = new(
-        name: @"--frequency-penalty")
-    {
-        Description = @"Penalize new tokens based on their frequency in text so far. Between -2.0 and 2.0.",
-    };
-
-    private static Option<float?> PresencePenalty { get; } = new(
-        name: @"--presence-penalty")
-    {
-        Description = @"Penalize new tokens based on whether they appear in text so far. Between -2.0 and 2.0.",
-    };
-
-    private static Option<float?> TopP { get; } = new(
-        name: @"--top-p")
-    {
-        Description = @"Nucleus sampling parameter. Between 0 and 1.",
-    };
-
-    private static Option<int?> Seed { get; } = new(
-        name: @"--seed")
-    {
-        Description = @"Seed for deterministic sampling.",
-    };
-
     private static Option<global::Martian.OneOf<string, global::System.Collections.Generic.IList<string>>?> Stop { get; } = new(
         name: @"--stop")
     {
         Description = @"Up to 4 sequences where the API will stop generating.",
-    };
-
-    private static Option<bool?> Logprobs { get; } = CliRuntime.CreateNullableBoolOption(
-        name: @"--logprobs",
-        description: @"Whether to return log probabilities of the output tokens.");
-
-    private static Option<int?> TopLogprobs { get; } = new(
-        name: @"--top-logprobs")
-    {
-        Description = @"Number of most likely tokens to return at each position.",
-    };
-
-    private static Option<string?> User { get; } = new(
-        name: @"--user")
-    {
-        Description = @"A unique identifier representing the end-user.",
-    };
-
-    private static Option<global::System.Collections.Generic.IList<string>?> Models { get; } = new(
-        name: @"--models")
-    {
-        Description = @"List of models the router can choose from. When specified, the router
-will only route between these models. Uses provider/model-name format.
-",
-    };
-
-    private static Option<float?> MaxCost { get; } = new(
-        name: @"--max-cost")
-    {
-        Description = @"Maximum cost of the total request in USD. Allows you to specify
-an upper bound on what you are willing to pay for the request.
-",
-    };
-
-    private static Option<float?> MaxCostPerMillionTokens { get; } = new(
-        name: @"--max-cost-per-million-tokens")
-    {
-        Description = @"Maximum cost per 1 million tokens in USD. Allows you to specify
-a minimum efficiency for your models.
-",
-    };
-
-    private static Option<float?> WillingnessToPay { get; } = new(
-        name: @"--willingness-to-pay")
-    {
-        Description = @"Value of getting better output, measured in dollars. A value of 0.1
-indicates that each 10% improvement in performance is worth 10 cents.
-If not set, defaults to infinity (optimize only for performance).
-",
     };
 
     private static Option<object?> Extra { get; } = new(
@@ -147,6 +37,9 @@ If not set, defaults to infinity (optimize only for performance).
     {
         Description = @"Arbitrary metadata to attach to the request for tracking.",
     };
+    private static readonly ChatCompletionRequestOptionSet ChatCompletionRequestOptionSetOptions = ChatCompletionRequestOptionSet.Create();
+
+    private static readonly ResponseFormatOptionSet ResponseFormatOptions = ResponseFormatOptionSet.Create(@"response-format");
       private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
@@ -194,28 +87,25 @@ Supports OpenAI-compatible parameters plus Martian-specific routing parameters
 such as models, max_cost, max_cost_per_million_tokens, and willingness_to_pay.
 The gateway intelligently routes to the best model based on cost, quality, and latency.
 ");
-                        command.Options.Add(Model);
                         command.Options.Add(Messages);
-                        command.Options.Add(Temperature);
-                        command.Options.Add(MaxCompletionTokens);
-                        command.Options.Add(MaxTokens);
-                        command.Options.Add(Stream);
                         command.Options.Add(Tools);
                         command.Options.Add(ToolChoice);
-                        command.Options.Add(ResponseFormat);
-                        command.Options.Add(FrequencyPenalty);
-                        command.Options.Add(PresencePenalty);
-                        command.Options.Add(TopP);
-                        command.Options.Add(Seed);
                         command.Options.Add(Stop);
-                        command.Options.Add(Logprobs);
-                        command.Options.Add(TopLogprobs);
-                        command.Options.Add(User);
-                        command.Options.Add(Models);
-                        command.Options.Add(MaxCost);
-                        command.Options.Add(MaxCostPerMillionTokens);
-                        command.Options.Add(WillingnessToPay);
-                        command.Options.Add(Extra);
+                        command.Options.Add(Extra);                        command.Options.Add(ChatCompletionRequestOptionSetOptions.Model);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.Temperature);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.MaxCompletionTokens);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.MaxTokens);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.FrequencyPenalty);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.PresencePenalty);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.TopP);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.Seed);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.Logprobs);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.TopLogprobs);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.User);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.Models);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.MaxCost);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.MaxCostPerMillionTokens);
+                        command.Options.Add(ChatCompletionRequestOptionSetOptions.WillingnessToPay);                        command.Options.Add(ResponseFormatOptions.Type);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
           command.Options.Add(RequestFile);
@@ -241,46 +131,53 @@ The gateway intelligently routes to the best model based on cost, quality, and l
                             RequestFile,
                             global::Martian.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
-                        var model = parseResult.GetRequiredValue(Model);
                         var messages = parseResult.GetRequiredValue(Messages);
-                        var temperature = CliRuntime.WasSpecified(parseResult, Temperature) ? parseResult.GetValue(Temperature) : (__requestBase is { } __TemperatureBaseValue ? __TemperatureBaseValue.Temperature : default);
-                        var maxCompletionTokens = CliRuntime.WasSpecified(parseResult, MaxCompletionTokens) ? parseResult.GetValue(MaxCompletionTokens) : (__requestBase is { } __MaxCompletionTokensBaseValue ? __MaxCompletionTokensBaseValue.MaxCompletionTokens : default);
-                        var maxTokens = CliRuntime.WasSpecified(parseResult, MaxTokens) ? parseResult.GetValue(MaxTokens) : (__requestBase is { } __MaxTokensBaseValue ? __MaxTokensBaseValue.MaxTokens : default);
-                        var stream = CliRuntime.WasSpecified(parseResult, Stream) ? parseResult.GetValue(Stream) : (__requestBase is { } __StreamBaseValue ? __StreamBaseValue.Stream : default);
                         var tools = CliRuntime.WasSpecified(parseResult, Tools) ? parseResult.GetValue(Tools) : (__requestBase is { } __ToolsBaseValue ? __ToolsBaseValue.Tools : default);
                         var toolChoice = CliRuntime.WasSpecified(parseResult, ToolChoice) ? parseResult.GetValue(ToolChoice) : (__requestBase is { } __ToolChoiceBaseValue ? __ToolChoiceBaseValue.ToolChoice : default);
-                        var responseFormat = CliRuntime.WasSpecified(parseResult, ResponseFormat) ? parseResult.GetValue(ResponseFormat) : (__requestBase is { } __ResponseFormatBaseValue ? __ResponseFormatBaseValue.ResponseFormat : default);
-                        var frequencyPenalty = CliRuntime.WasSpecified(parseResult, FrequencyPenalty) ? parseResult.GetValue(FrequencyPenalty) : (__requestBase is { } __FrequencyPenaltyBaseValue ? __FrequencyPenaltyBaseValue.FrequencyPenalty : default);
-                        var presencePenalty = CliRuntime.WasSpecified(parseResult, PresencePenalty) ? parseResult.GetValue(PresencePenalty) : (__requestBase is { } __PresencePenaltyBaseValue ? __PresencePenaltyBaseValue.PresencePenalty : default);
-                        var topP = CliRuntime.WasSpecified(parseResult, TopP) ? parseResult.GetValue(TopP) : (__requestBase is { } __TopPBaseValue ? __TopPBaseValue.TopP : default);
-                        var seed = CliRuntime.WasSpecified(parseResult, Seed) ? parseResult.GetValue(Seed) : (__requestBase is { } __SeedBaseValue ? __SeedBaseValue.Seed : default);
                         var stop = CliRuntime.WasSpecified(parseResult, Stop) ? parseResult.GetValue(Stop) : (__requestBase is { } __StopBaseValue ? __StopBaseValue.Stop : default);
-                        var logprobs = CliRuntime.WasSpecified(parseResult, Logprobs) ? parseResult.GetValue(Logprobs) : (__requestBase is { } __LogprobsBaseValue ? __LogprobsBaseValue.Logprobs : default);
-                        var topLogprobs = CliRuntime.WasSpecified(parseResult, TopLogprobs) ? parseResult.GetValue(TopLogprobs) : (__requestBase is { } __TopLogprobsBaseValue ? __TopLogprobsBaseValue.TopLogprobs : default);
-                        var user = CliRuntime.WasSpecified(parseResult, User) ? parseResult.GetValue(User) : (__requestBase is { } __UserBaseValue ? __UserBaseValue.User : default);
-                        var models = CliRuntime.WasSpecified(parseResult, Models) ? parseResult.GetValue(Models) : (__requestBase is { } __ModelsBaseValue ? __ModelsBaseValue.Models : default);
-                        var maxCost = CliRuntime.WasSpecified(parseResult, MaxCost) ? parseResult.GetValue(MaxCost) : (__requestBase is { } __MaxCostBaseValue ? __MaxCostBaseValue.MaxCost : default);
-                        var maxCostPerMillionTokens = CliRuntime.WasSpecified(parseResult, MaxCostPerMillionTokens) ? parseResult.GetValue(MaxCostPerMillionTokens) : (__requestBase is { } __MaxCostPerMillionTokensBaseValue ? __MaxCostPerMillionTokensBaseValue.MaxCostPerMillionTokens : default);
-                        var willingnessToPay = CliRuntime.WasSpecified(parseResult, WillingnessToPay) ? parseResult.GetValue(WillingnessToPay) : (__requestBase is { } __WillingnessToPayBaseValue ? __WillingnessToPayBaseValue.WillingnessToPay : default);
-                        var extra = CliRuntime.WasSpecified(parseResult, Extra) ? parseResult.GetValue(Extra) : (__requestBase is { } __ExtraBaseValue ? __ExtraBaseValue.Extra : default);
+                        var extra = CliRuntime.WasSpecified(parseResult, Extra) ? parseResult.GetValue(Extra) : (__requestBase is { } __ExtraBaseValue ? __ExtraBaseValue.Extra : default);                        var model = parseResult.GetRequiredValue(ChatCompletionRequestOptionSetOptions.Model);
+                        var temperature = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.Temperature) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.Temperature) : (__requestBase is { } __TemperatureBaseValue ? __TemperatureBaseValue.Temperature : default);
+                        var maxCompletionTokens = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.MaxCompletionTokens) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.MaxCompletionTokens) : (__requestBase is { } __MaxCompletionTokensBaseValue ? __MaxCompletionTokensBaseValue.MaxCompletionTokens : default);
+                        var maxTokens = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.MaxTokens) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.MaxTokens) : (__requestBase is { } __MaxTokensBaseValue ? __MaxTokensBaseValue.MaxTokens : default);
+                        var frequencyPenalty = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.FrequencyPenalty) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.FrequencyPenalty) : (__requestBase is { } __FrequencyPenaltyBaseValue ? __FrequencyPenaltyBaseValue.FrequencyPenalty : default);
+                        var presencePenalty = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.PresencePenalty) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.PresencePenalty) : (__requestBase is { } __PresencePenaltyBaseValue ? __PresencePenaltyBaseValue.PresencePenalty : default);
+                        var topP = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.TopP) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.TopP) : (__requestBase is { } __TopPBaseValue ? __TopPBaseValue.TopP : default);
+                        var seed = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.Seed) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.Seed) : (__requestBase is { } __SeedBaseValue ? __SeedBaseValue.Seed : default);
+                        var logprobs = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.Logprobs) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.Logprobs) : (__requestBase is { } __LogprobsBaseValue ? __LogprobsBaseValue.Logprobs : default);
+                        var topLogprobs = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.TopLogprobs) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.TopLogprobs) : (__requestBase is { } __TopLogprobsBaseValue ? __TopLogprobsBaseValue.TopLogprobs : default);
+                        var user = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.User) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.User) : (__requestBase is { } __UserBaseValue ? __UserBaseValue.User : default);
+                        var models = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.Models) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.Models) : (__requestBase is { } __ModelsBaseValue ? __ModelsBaseValue.Models : default);
+                        var maxCost = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.MaxCost) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.MaxCost) : (__requestBase is { } __MaxCostBaseValue ? __MaxCostBaseValue.MaxCost : default);
+                        var maxCostPerMillionTokens = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.MaxCostPerMillionTokens) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.MaxCostPerMillionTokens) : (__requestBase is { } __MaxCostPerMillionTokensBaseValue ? __MaxCostPerMillionTokensBaseValue.MaxCostPerMillionTokens : default);
+                        var willingnessToPay = CliRuntime.WasSpecified(parseResult, ChatCompletionRequestOptionSetOptions.WillingnessToPay) ? parseResult.GetValue(ChatCompletionRequestOptionSetOptions.WillingnessToPay) : (__requestBase is { } __WillingnessToPayBaseValue ? __WillingnessToPayBaseValue.WillingnessToPay : default);
+
+                        var __ResponseFormatBase = __requestBase is { } __ResponseFormatBaseValue ? __ResponseFormatBaseValue.ResponseFormat : default;                        var responseFormatType = CliRuntime.WasSpecified(parseResult, ResponseFormatOptions.Type) ? parseResult.GetValue(ResponseFormatOptions.Type) : (__ResponseFormatBase is { } __ResponseFormattypeBaseValue ? __ResponseFormattypeBaseValue.Type : default);
+                        var __ResponseFormatSpecified = CliRuntime.WasSpecified(parseResult, ResponseFormatOptions.Type);
+                        var responseFormat =
+                            __ResponseFormatSpecified || __ResponseFormatBase is not null
+                                ? new global::Martian.ResponseFormat
+                                {
+	                                Type = responseFormatType,
+
+                                }
+                                : __ResponseFormatBase;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
                                 var response = await client.CreateChatCompletionAsync(
-                                    model: model,
                                     messages: messages,
+                                    tools: tools,
+                                    toolChoice: toolChoice,
+                                    stop: stop,
+                                    extra: extra,
+                                    model: model,
                                     temperature: temperature,
                                     maxCompletionTokens: maxCompletionTokens,
                                     maxTokens: maxTokens,
-                                    stream: stream,
-                                    tools: tools,
-                                    toolChoice: toolChoice,
-                                    responseFormat: responseFormat,
                                     frequencyPenalty: frequencyPenalty,
                                     presencePenalty: presencePenalty,
                                     topP: topP,
                                     seed: seed,
-                                    stop: stop,
                                     logprobs: logprobs,
                                     topLogprobs: topLogprobs,
                                     user: user,
@@ -288,7 +185,7 @@ The gateway intelligently routes to the best model based on cost, quality, and l
                                     maxCost: maxCost,
                                     maxCostPerMillionTokens: maxCostPerMillionTokens,
                                     willingnessToPay: willingnessToPay,
-                                    extra: extra,
+                                    responseFormat: responseFormat,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
 
