@@ -18,7 +18,7 @@ namespace Martian.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Martian.ChatCompletionRequestToolChoiceEnumExtensions.ToEnum(stringValue) ?? default;
+                        return global::Martian.ChatCompletionRequestToolChoiceEnumExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Martian.ChatCompletionRequestToolChoiceEnum.");
                     }
 
                     break;
