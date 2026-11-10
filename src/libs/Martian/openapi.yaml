@@ -24,7 +24,6 @@ components:
       scheme: bearer
   schemas:
     # ─── Chat Completions (OpenAI-compatible + Martian routing) ───
-
     ChatCompletionMessage:
       type: object
       required:
@@ -57,7 +56,6 @@ components:
         tool_call_id:
           type: string
           description: Tool call that this message is responding to.
-
     ContentPart:
       type: object
       required:
@@ -86,7 +84,6 @@ components:
                 - auto
                 - low
                 - high
-
     ToolCall:
       type: object
       required:
@@ -114,7 +111,6 @@ components:
             arguments:
               type: string
               description: JSON-encoded arguments for the function call.
-
     Tool:
       type: object
       required:
@@ -140,7 +136,6 @@ components:
             parameters:
               type: object
               description: The parameters the function accepts as a JSON Schema object.
-
     ResponseFormat:
       type: object
       properties:
@@ -164,7 +159,6 @@ components:
             strict:
               type: boolean
               description: Whether to enable strict schema adherence.
-
     ChatCompletionRequest:
       type: object
       required:
@@ -293,7 +287,6 @@ components:
           type: object
           description: Arbitrary metadata to attach to the request for tracking.
           additionalProperties: true
-
     ChatCompletionChoice:
       type: object
       properties:
@@ -310,7 +303,6 @@ components:
             - length
             - tool_calls
             - content_filter
-
     CompletionUsage:
       type: object
       properties:
@@ -323,7 +315,6 @@ components:
         total_tokens:
           type: integer
           description: Total number of tokens used.
-
     ChatCompletionResponse:
       type: object
       properties:
@@ -351,9 +342,7 @@ components:
         system_fingerprint:
           type: string
           description: A fingerprint of the backend configuration.
-
     # ─── Streaming ───
-
     ChatCompletionChunkDelta:
       type: object
       properties:
@@ -374,7 +363,6 @@ components:
           description: Tool call chunks.
           items:
             $ref: '#/components/schemas/ToolCallChunk'
-
     ToolCallChunk:
       type: object
       properties:
@@ -397,7 +385,6 @@ components:
             arguments:
               type: string
               description: Fragment of JSON-encoded arguments.
-
     ChatCompletionChunkChoice:
       type: object
       properties:
@@ -415,7 +402,6 @@ components:
             - length
             - tool_calls
             - content_filter
-
     ChatCompletionChunkResponse:
       type: object
       properties:
@@ -440,9 +426,7 @@ components:
             $ref: '#/components/schemas/ChatCompletionChunkChoice'
         usage:
           $ref: '#/components/schemas/CompletionUsage'
-
     # ─── Anthropic Messages ───
-
     AnthropicMessage:
       type: object
       required:
@@ -462,7 +446,6 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/AnthropicContentBlock'
-
     AnthropicContentBlock:
       type: object
       required:
@@ -509,7 +492,6 @@ components:
         content:
           type: string
           description: The tool result content.
-
     AnthropicTool:
       type: object
       required:
@@ -525,7 +507,6 @@ components:
         input_schema:
           type: object
           description: The JSON Schema for the tool input.
-
     MessagesRequest:
       type: object
       required:
@@ -592,7 +573,6 @@ components:
           description: Custom text sequences that will cause the model to stop generating.
           items:
             type: string
-
     AnthropicResponseContentBlock:
       type: object
       properties:
@@ -615,7 +595,6 @@ components:
           type: object
           description: The tool input.
           additionalProperties: true
-
     AnthropicUsage:
       type: object
       properties:
@@ -625,7 +604,6 @@ components:
         output_tokens:
           type: integer
           description: Number of output tokens.
-
     MessagesResponse:
       type: object
       properties:
@@ -664,9 +642,7 @@ components:
           nullable: true
         usage:
           $ref: '#/components/schemas/AnthropicUsage'
-
     # ─── List Models ───
-
     ModelInfo:
       type: object
       properties:
@@ -700,7 +676,6 @@ components:
             - high
             - medium
             - low
-
     ListModelsResponse:
       type: object
       properties:
@@ -714,9 +689,7 @@ components:
           description: A list of available models.
           items:
             $ref: '#/components/schemas/ModelInfo'
-
     # ─── Errors ───
-
     ErrorResponse:
       type: object
       properties:
@@ -732,7 +705,6 @@ components:
             code:
               type: string
               description: The error code.
-
 paths:
   /v1/chat/completions:
     post:
@@ -756,6 +728,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChatCompletionResponse'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionChunkResponse'
         '400':
           description: Bad request
           content:
@@ -774,7 +749,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/messages:
     post:
       operationId: createMessage
@@ -814,7 +788,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /v1/models:
     get:
       operationId: listModels

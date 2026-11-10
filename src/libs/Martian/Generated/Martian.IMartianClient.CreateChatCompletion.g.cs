@@ -59,10 +59,6 @@ namespace Martian
         /// <param name="maxTokens">
         /// Maximum number of tokens to generate (deprecated, use max_completion_tokens).
         /// </param>
-        /// <param name="stream">
-        /// If true, partial message deltas will be sent as SSE events.<br/>
-        /// Default Value: false
-        /// </param>
         /// <param name="tools">
         /// A list of tools the model may call.
         /// </param>
@@ -123,7 +119,6 @@ namespace Martian
             float? temperature = default,
             int? maxCompletionTokens = default,
             int? maxTokens = default,
-            bool? stream = default,
             global::System.Collections.Generic.IList<global::Martian.Tool>? tools = default,
             global::Martian.OneOf<global::Martian.ChatCompletionRequestToolChoiceEnum?, global::Martian.ChatCompletionRequestToolChoiceEnum2>? toolChoice = default,
             global::Martian.ResponseFormat? responseFormat = default,

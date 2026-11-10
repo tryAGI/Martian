@@ -86,6 +86,31 @@ namespace Martian
         {
             request = request ?? throw new global::System.ArgumentNullException(nameof(request));
 
+            request = new global::Martian.ChatCompletionRequest
+            {
+                Model = request.Model,
+                Messages = request.Messages,
+                Temperature = request.Temperature,
+                MaxCompletionTokens = request.MaxCompletionTokens,
+                MaxTokens = request.MaxTokens,
+                Stream = false,
+                Tools = request.Tools,
+                ToolChoice = request.ToolChoice,
+                ResponseFormat = request.ResponseFormat,
+                FrequencyPenalty = request.FrequencyPenalty,
+                PresencePenalty = request.PresencePenalty,
+                TopP = request.TopP,
+                Seed = request.Seed,
+                Stop = request.Stop,
+                Logprobs = request.Logprobs,
+                TopLogprobs = request.TopLogprobs,
+                User = request.User,
+                Models = request.Models,
+                MaxCost = request.MaxCost,
+                MaxCostPerMillionTokens = request.MaxCostPerMillionTokens,
+                WillingnessToPay = request.WillingnessToPay,
+                Extra = request.Extra,
+            };
             PrepareArguments(
                 client: HttpClient);
             PrepareCreateChatCompletionArguments(
@@ -130,6 +155,10 @@ namespace Martian
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
+
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/json");
 
             foreach (var __authorization in __authorizations)
             {
@@ -573,10 +602,6 @@ namespace Martian
         /// <param name="maxTokens">
         /// Maximum number of tokens to generate (deprecated, use max_completion_tokens).
         /// </param>
-        /// <param name="stream">
-        /// If true, partial message deltas will be sent as SSE events.<br/>
-        /// Default Value: false
-        /// </param>
         /// <param name="tools">
         /// A list of tools the model may call.
         /// </param>
@@ -637,7 +662,6 @@ namespace Martian
             float? temperature = default,
             int? maxCompletionTokens = default,
             int? maxTokens = default,
-            bool? stream = default,
             global::System.Collections.Generic.IList<global::Martian.Tool>? tools = default,
             global::Martian.OneOf<global::Martian.ChatCompletionRequestToolChoiceEnum?, global::Martian.ChatCompletionRequestToolChoiceEnum2>? toolChoice = default,
             global::Martian.ResponseFormat? responseFormat = default,
@@ -664,7 +688,7 @@ namespace Martian
                 Temperature = temperature,
                 MaxCompletionTokens = maxCompletionTokens,
                 MaxTokens = maxTokens,
-                Stream = stream,
+                Stream = false,
                 Tools = tools,
                 ToolChoice = toolChoice,
                 ResponseFormat = responseFormat,
